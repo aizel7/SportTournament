@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table (name = "VolleyballMatch")
+@Table (name = "volleyballmatch")
 
 
 public class VolleyballMatch {
@@ -12,13 +12,16 @@ public class VolleyballMatch {
     @Id
     private int id;
 
-    @Column(name = "Team_A")
+    @Column(name = "TeamA")
     private String teamA;
 
-    @Column(name = "Team_B")
+    @Column(name = "TeamB")
     private String teamB;
 
-    @Column(name = "Match_Time")
+    @Column(name = "match_date")
+    private String date;
+
+    @Column(name = "match_time")
     private String time;
 
     public VolleyballMatch(){
@@ -74,6 +77,7 @@ public class VolleyballMatch {
                 ", Match Time='" + getTime() + '\'' +
                 '}';
     }
+
 }
 
 
