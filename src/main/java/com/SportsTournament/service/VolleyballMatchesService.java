@@ -19,7 +19,7 @@ public class VolleyballMatchesService {
     @Transactional
     public String createVolleyballMatch(VolleyballMatch volleyballMatch){
     try {
-        if (!volleyballRepository.existbydate(volleyballMatch.getDate())){
+        if (!volleyballRepository.existsBydate(volleyballMatch.getDate())){
             volleyballMatch.setId(null == volleyballRepository.findMaxId()? 0 : volleyballRepository.findMaxId() + 1 );
             volleyballRepository.save(volleyballMatch);
             return "Match record created successfully.";
@@ -32,14 +32,14 @@ public class VolleyballMatchesService {
     }
 
     public List<VolleyballMatch> readMatches(){
-        return volleyballRepository.findAll();
+        return (List<VolleyballMatch>) volleyballRepository.findAll();
     }
 
     @Transactional
     public String updateVolleyballMatch(VolleyballMatch volleyballMatch){
-        if (volleyballRepository.existbydate(volleyballMatch.getDate())){
+        if (volleyballRepository.existsBydate(volleyballMatch.getDate())){
             try {
-                List<VolleyballMatch> volleyballMatches = volleyballRepository.findbydate(volleyballMatch.getDate());
+                List<VolleyballMatch> volleyballMatches = volleyballRepository.findBydate(volleyballMatch.getDate());
                 volleyballMatches.stream().forEach(s -> {
                     VolleyballMatch volleyballMatchToBeUpdate = volleyballRepository.findById(s.getId()).get();
                     volleyballMatchToBeUpdate.setTeamA(volleyballMatch.getTeamA());
@@ -59,9 +59,9 @@ public class VolleyballMatchesService {
 
     @Transactional
     public String deleteVolleyballMatch(VolleyballMatch volleyballMatch){
-        if (volleyballRepository.existbydate(volleyballMatch.getDate())){
+        if (volleyballRepository.existsBydate(volleyballMatch.getDate())){
             try {
-                List<VolleyballMatch> volleyballMatches = volleyballRepository.findbydate(volleyballMatch.getDate());
+                List<VolleyballMatch> volleyballMatches = volleyballRepository.findBydate(volleyballMatch.getDate());
                 volleyballMatches.stream().forEach(s -> {
                     volleyballRepository.delete(s);
                 });

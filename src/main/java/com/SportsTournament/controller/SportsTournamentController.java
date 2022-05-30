@@ -24,7 +24,7 @@ public class SportsTournamentController {
     @RequestMapping("/matches")
     public String getUpdates(Model model) {
         model.addAttribute("volleyballMatches", volleyballMatchesService.readMatches());
-        return "index";
+        return "Volleyball Matches";
     }
 
     @RequestMapping(value = "createVolleyballMatch", method = RequestMethod.POST)
